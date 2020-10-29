@@ -9,22 +9,9 @@ interface AppProps {
   deleteTodo: Function
 }
 
-interface AppState {
-  fetching: boolean
-}
-class _App extends React.Component<AppProps, AppState> {
-  
-  state = { fetching: false}
-
-  componentDidUpdate(prevProps: AppProps): void {
-    if (!prevProps.todos.length && this.props.todos.length) {
-      this.setState({ fetching: false })
-    }
-  }
-
+class _App extends React.Component<AppProps> {
   onButtonClick = (): void => {
     this.props.fetchTodos()
-    this.setState({ fetching: true})
   }
 
   onTodoClick = (id: number): void => {
@@ -46,7 +33,6 @@ class _App extends React.Component<AppProps, AppState> {
     return (
       <div>
         <button onClick={this.onButtonClick}>Fetch</button>
-        {this.state.fetching ? 'LOADING' : null }
         {this.renderList()}
       </div>
     )
